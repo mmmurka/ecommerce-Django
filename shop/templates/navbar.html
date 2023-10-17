@@ -17,7 +17,27 @@
             </div>
           </li>
           <li class="nav-item"><a class="nav-link text-light text-uppercase font-weight-bold px-3" href="#">Contacs</a> </li>
+
           <li class="nav-item"><a class="nav-link text-light text-uppercase font-weight-bold px-3" href="#">About</a> </li>
+            {% if request.user.is_authenticated and request.user.first_name %}
+            <li class="nav-item"><span class="nav-link text-light text-uppercase font-weight-bold px-3" href="#">Welcome, {{ request.user.first_name }}! <span class="material-symbols-outlined cart-icon" style="color:gray;">account_circle</span></span> </li>
+
+            <li class="nav-item"><a class="nav-link text-light text-uppercase font-weight-bold px-3" href="{% url 'signout' %}">Sign Out<span class="material-symbols-outlined cart-icon" style="color:gray;">exit_to_app</span></a> </li>
+
+            {% else %}
+
+            <li class="nav-item"><a class="nav-link text-light text-uppercase font-weight-bold px-3" href="{% url 'signup' %}">Sign Up<span class="material-symbols-outlined cart-icon" style="color:gray;">add</span></a> </li>
+
+            <li class="nav-item"><a class="nav-link text-light text-uppercase font-weight-bold px-3" href="{% url 'login' %}">Login<span class="material-symbols-outlined cart-icon" style="color:gray;">login</span></a> </li>
+
+            {% endif %}
+
+
+            {% if item_count > 0 %}
+            <li class="nav-item"><a class="nav-link text-light text-uppercase font-weight-bold px-3" href="{% url 'cart_detail' %}">
+              <span class="material-symbols-outlined cart-icon" style="color:gray;">add_shopping_cart</span>
+              ({{item_count}})</a> </li>
+            {% endif %}
         </ul>
 
       <form class="form-inline">
