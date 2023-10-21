@@ -118,6 +118,17 @@ def signoutView(request):
 
 
 
+def search_view(request):
+    query = request.GET.get('query')
+    results = Product.objects.filter(name__icontains=query)
+    context = {
+        'results': results,
+    }
+    return render(request, 'search.html', context)
+
+
+
+
 
 
 

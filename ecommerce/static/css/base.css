@@ -1,6 +1,4 @@
-body {
-    background: #F8F8F8
-}
+
 
 .product_title {
     font-size: 30px;
@@ -31,4 +29,8 @@ body {
 .custom_div {
 
     margin-bottom: 20px !important;
+}
+
+.my-custom-bg-color {
+  background-color: #708090;
 }
