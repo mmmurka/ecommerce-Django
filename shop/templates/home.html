@@ -9,9 +9,9 @@
 {% block content %}
 
 <div class="container-fluid">
-    <div class="row">
-        <img class="img-fluid" src="{% static 'images/banner.png' %}">
-    </div>
+    <!-- <div class="row">
+    <img class="img-fluid" src="{% static 'images/banner.png' %}">
+</div> -->
     <div/>
 
     <div class="py-4">
@@ -25,7 +25,7 @@
                 <div/>
             <div/>
     </div>
-
+    <br>
 
     <div class="container">
     <div class="row">
@@ -33,7 +33,7 @@
             <div class="col-9 mx-auto col-md-6 col-lg-3">
                 <div class="card mb-5">
                     <div class="p-4">
-                        <a href="{{product.get_url}}"><img class="card-img-top" src="{{product.image.url}}" alt="{{product.name}}"></a>
+                        <a href="{{product.get_url}}"><img class="card-img-top" src="{{product.image.url}}" alt="{{product.name}}" style="max-width: 200px; max-height: 200px;"></a>
 
                     </div>
 

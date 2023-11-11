@@ -95,7 +95,6 @@ def signUpView(request):
 
 
 
-
 def loginView(request):
     if request.method == 'POST':
         form = AuthenticationForm(data=request.POST)

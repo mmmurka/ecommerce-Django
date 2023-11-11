@@ -1,54 +1,95 @@
-<nav class="navbar navbar-expand-md navbar-light bg-dark">
+{% load static %}
 
-        <a href="/" class="navbar-brand">
-          <span class="material-icons material-symbols-outlined text-success material-icons md-48">store</span>
-        <button class="navbar-toggler bg-light" data-bs-toggle="collapse" data-target="#navbar"><span class="navbar-toggler-icon"></span> </button>
-        <div id="navbar" class="collapse navbar-collapse justify-content-between">
-        </a>
-        <ul class="navbar-collapse ml-auto">
-          <li class="nav-item dropdown" style="margin-bottom: -15px;">
-            <a class="nav-link text-light text-uppercase font-weight-bold px-3 dropdown-toggle" data-bs-toggle="dropdown" href="#" id="categoriesDropdown">Categories</a>
-            <div class="dropdown-menu" aria-labelledby="categoriesDropdown">
-             <a class="dropdown-item" href="{% url 'home' %}">All products</a>
-            {% for category in links %}
-              <a class="dropdown-item" href="{{category.get_url}}">{{category.name}}</a>
-            {% endfor %}
+<nav class="navbar navbar-expand-md navbar-dark bg-black custom-navbar-width" style="height: 90px">
+  <a href="/" class="navbar-brand">
+    <img src="{% static 'images/logo.svg' %}" width="65" height="75" alt="Ваш_лого" style="margin-left: 10px;">
+  </a>
+  <button class="navbar-toggler bg-light" data-bs-toggle="collapse" data-target="#navbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div id="navbar" class="collapse navbar-collapse justify-content-between" style="margin-right: 30px">
 
-            </div>
-          </li>
-          <li class="nav-item" style="margin-bottom: -15px;"><a class="nav-link text-light text-uppercase font-weight-bold px-3" href="#">Contacs</a> </li>
+    <ul class="navbar-nav w-100 justify-content-between align-items-center" style="margin-left: 30px">
+      <li class="nav-item">
+        <a href="#" style="flex-grow: 1;  color: #EAD7D7; font-size: 14px; font-family: Lucida Sans Unicode; font-weight: 400; letter-spacing: 0.80px; word-wrap: break-word; text-decoration: none;">Strona główna</a>
+      </li>
+      <li class="nav-item">
+        <a href="#" style="flex-grow: 1;  color: #EAD7D7; font-size: 14px; font-family: Lucida Sans Unicode; font-weight: 400; letter-spacing: 0.80px; word-wrap: break-word; text-decoration: none;">Promocje w Warszawie</a>
+      </li>
+      <li class="nav-item">
+        <a href="#" style="flex-grow: 1;  color: #EAD7D7; font-size: 14px; font-family: Lucida Sans Unicode; font-weight: 400; letter-spacing: 0.80px; word-wrap: break-word; text-decoration: none;">Dostawa i płatność</a>
+      </li>
+      <li class="nav-item">
+        <a href="#" style="flex-grow: 1;  color: #EAD7D7; font-size: 14px; font-family: Lucida Sans Unicode; font-weight: 400; letter-spacing: 0.80px; word-wrap: break-word; text-decoration: none;">O nas</a>
+      </li>
+      <li class="nav-item">
+        <a href="#" style="flex-grow: 1;  color: #EAD7D7; font-size: 14px; font-family: Lucida Sans Unicode; font-weight: 400; letter-spacing: 0.80px; word-wrap: break-word; text-decoration: none;">Kontakt</a>
+      </li>
 
-          <li class="nav-item" style="margin-bottom: -15px;"><a class="nav-link text-light text-uppercase font-weight-bold px-3" href="#">About</a> </li>
-            {% if request.user.is_authenticated and request.user.first_name %}
-            <li class="nav-item"><span class="nav-link text-light text-uppercase font-weight-bold px-3" href="#">Welcome, {{ request.user.first_name }}! <span class="material-symbols-outlined cart-icon" style="color:gray;">account_circle</span></span> </li>
+      <li class="nav-item dropdown" onmouseover="showLanguageDropdown()" onmouseout="hideLanguageDropdown()">
+  <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" role="button" aria-expanded="false" style="flex-grow: 1; color: #EAD7D7; font-size: 14px; font-family: Lucida Sans Unicode; font-weight: 400; letter-spacing: 0.80px; word-wrap: break-word; text-decoration: none; vertical-align: baseline;">
+    Pl
+  </a>
+  <ul class="dropdown-menu" aria-labelledby="languageDropdown" style="display: none; background-color: black;">
+    <li><a class="dropdown-item" href="#" style="color: #EAD7D7; ">Ru</a></li>
+    <li><a class="dropdown-item" href="#" style="color: #EAD7D7; ">Ua</a></li>
+  </ul>
+</li>
 
-            <li class="nav-item"><a class="nav-link text-light text-uppercase font-weight-bold px-3" href="{% url 'signout' %}">Sign Out<span class="material-symbols-outlined cart-icon" style="color:gray;">exit_to_app</span></a> </li>
+    <li class="nav-item dropdown" onmouseover="showOtherDropdown()" onmouseleave="hideOtherDropdown()">
+  <!-- Код вашого другого меню тут -->
+       <a class="nav-link dropdown-toggle" href="#" id="OtherDropdown" role="button" aria-expanded="false" style="flex-grow: 1;  color: #EAD7D7; font-size: 14px; font-family: Lucida Sans Unicode; font-weight: 400; letter-spacing: 0.80px; word-wrap: break-word; text-decoration: none; vertical-align: baseline;">
+    Godziny Pracy
+  </a>
+  <ul class="dropdown-menu other-dropdown-menu" aria-labelledby="OtherDropdown" style="display: none; background-color: black;">
+    <li><p class="dropdown-item" style="color: #EAD7D7; ">Niedziela-Czwartek 12:00-23:00</p></li>
+    <li><p class="dropdown-item" style="color: #EAD7D7; ">Piątek-sobota 12:00-23:00</p></li>
+  </ul>
+</li>
 
-            {% else %}
-
-            <li class="nav-item" style="margin-bottom: -10px;"><a class="nav-link text-light text-uppercase font-weight-bold px-3" href="{% url 'signup' %}">Sign Up<span class="material-symbols-outlined cart-icon" style="color:gray;">add</span></a> </li>
-
-            <li class="nav-item" style="margin-bottom: -10px;"><a class="nav-link text-light text-uppercase font-weight-bold px-3" href="{% url 'login' %}">Login<span class="material-symbols-outlined cart-icon" style="color:gray;">login</span></a> </li>
-
-            {% endif %}
 
 
-            {% if item_count > 0 %}
-            <li class="nav-item"><a class="nav-link text-light text-uppercase font-weight-bold px-3" href="{% url 'cart_detail' %}">
-              <span class="material-symbols-outlined cart-icon" style="color:gray;">add_shopping_cart</span>
-              ({{item_count}})</a> </li>
-            {% endif %}
-        </ul>
+      <li class="nav-item d-flex align-items-center">
+  <span class="material-symbols-outlined text-white" style="color: #EAD7D7; font-size: 20px;">location_on</span>
+  <a href="#" style="flex-grow: 1;  color: #EAD7D7; font-size: 14px; font-family: Lucida Sans Unicode; font-weight: 400; letter-spacing: 0.80px; word-wrap: break-word; text-decoration: none; text-align: center;">Warszawa</a>
+</li>
 
-      <form class="form-inline" action="{% url 'search' %}">
-        <div class="input-group">
-          <input type="search" placeholder="Search" name="query">
-          <div>
-            <button class="btn btn-outline-success" type="submit">
-              <span class="btn-success material-icons material-symbols-outlined text-success material-icons md-28">search</span>
-            </button>
-          </div>
-        </div>
-      </form>
-       </div>
-    </nav>
+
+
+<style>
+.dropdown-menu {
+  position: absolute;
+  width: auto;
+  min-width: 20px;
+}
+.nav-item.dropdown:hover .dropdown-menu {
+  display: block;
+}
+</style>
+
+
+
+
+<script>
+function showLanguageDropdown() {9
+  document.querySelector('.dropdown-menu').style.display = 'block';
+}
+
+function hideLanguageDropdown() {
+  document.querySelector('.dropdown-menu').style.display = 'none';
+}
+
+function showOtherDropdown() {
+  document.querySelector('.other-dropdown-menu').style.display = 'block';
+}
+
+function hideOtherDropdown() {
+  document.querySelector('.other-dropdown-menu').style.display = 'none';
+}
+</script>
+
+    </ul>
+
+  </div>
+
+</nav>
